@@ -1,0 +1,7 @@
+FROM laravel-ci:local
+
+WORKDIR /app
+COPY test /app
+
+RUN composer -v
+RUN composer install

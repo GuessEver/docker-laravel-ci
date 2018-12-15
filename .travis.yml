@@ -1,0 +1,22 @@
+image: alpine
+services:
+  - docker
+
+install:
+  - docker build . -t laravel-ci:local
+
+after_install:
+  - docker images
+
+script:
+  - git clone https://github.com/laravel/laravel.git test
+  - docker build . -f Dockerfile-ci
+
+after_success:
+  - rm -rf ./test
+  - git status
+  - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+  - git fetch
+  - git checkout master 
+  - git merge origin/develop --no-ff --no-edit
+  - git status
