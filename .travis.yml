@@ -1,3 +1,5 @@
+sudo: required
+
 image: alpine
 services:
   - docker
@@ -14,9 +16,18 @@ script:
 
 after_success:
   - rm -rf ./test
-  - git status
   - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
   - git fetch
   - git checkout master 
   - git merge origin/develop --no-ff --no-edit
-  - git status
+
+  - openssl aes-256-cbc -K $encrypted_f3aea5cacb96_key -iv $encrypted_f3aea5cacb96_iv
+    -in id_rsa.enc -out id_rsa -d
+  - mv id_rsa ~/.ssh/id_rsa
+  - sudo chmod 600 ~/.ssh/id_rsa
+
+  - git remote add upstream git@github.com:GuessEver/docker-laravel-ci.git
+  - git fetch upstream
+
+  - git config user.name "Travis CI"
+  - git push upstream master
