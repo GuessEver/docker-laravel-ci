@@ -2,8 +2,6 @@
 
 ![](https://img.shields.io/github/license/GuessEver/docker-laravel-ci.svg)
 [![Build Status](https://travis-ci.com/GuessEver/docker-laravel-ci.svg?branch=master)](https://travis-ci.com/GuessEver/docker-laravel-ci)
-![](https://img.shields.io/docker/automated/guessever/laravel-ci.svg)
-![](https://img.shields.io/docker/build/guessever/laravel-ci.svg)
 
 Laravel docker container for ci test, it helps you to speed up test process
 
